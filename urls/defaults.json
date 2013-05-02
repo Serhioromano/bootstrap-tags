@@ -1,0 +1,16 @@
+[
+    {
+        "id": "2",
+        "text": "Apple",
+        "html": "This is <b>Apple</b>!"
+    },
+    {
+        "id": "3",
+        "text": "Mango",
+        "html": "I like <b>Mango</b>!"
+    },
+    {
+        "id": "5",
+        "text": "Pear"
+    }
+]

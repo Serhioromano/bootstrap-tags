@@ -1,7 +1,10 @@
 {
-  "name": "bootstrap-tags",
+  "name": "bootstrap-tags-input",
   "version": "0.0.1",
-  "main": ["./css/bootstrap-tags.css", "./js/bootstrap-tags.js"],
+  "main": [
+      "./css/bootstrap-tags.css",
+      "./js/bootstrap-tags.js"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",

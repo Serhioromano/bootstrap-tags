@@ -1,0 +1,10 @@
+*[data-tag-id] {
+    margin-right: 5px;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 18px;
+}
+*[data-tag-id] a {
+    cursor: pointer;
+    margin-left: 5px;
+}

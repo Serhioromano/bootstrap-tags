@@ -3,6 +3,7 @@
 <head>
 	<title>Bootstrap tags - pills UI component</title>
 	<link rel="stylesheet" href="components/bootstrap/docs/assets/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/bootstrap-tags.css"/>
 </head>
 <body>
 <div class="container">
@@ -14,8 +15,12 @@
 		</p>
 	</div>
 	<div class="row">
-		<div class="span4"><h3>Standard demo</h3></div>
-		<div class="span8">Demo</div>
+		<div class="span4"><h3>Standard demo</h3>
+		<p>Simple tags with default options</p>
+		</div>
+		<div class="span8">
+			<div id="bs-tags"></div>
+		</div>
 	</div>
 </div>
 
@@ -23,7 +28,7 @@
 <script type="text/javascript" src="components/bootstrap/docs/assets/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/bootstrap-tags.js"></script>
 <script type="text/javascript">
-
+	$('#bs-tags').tags({values: ["Banana"], values_url: 'urls/defaults.json'});
 </script>
 </body>
 </html>
