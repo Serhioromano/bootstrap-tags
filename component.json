@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-tags",
   "version": "0.0.1",
-  "main": "./css/tags.css ./js/tags.js",
+  "main": ["./css/bootstrap-tags.css", "./js/bootstrap-tags.js"],
   "ignore": [
     "**/.*",
     "node_modules",
