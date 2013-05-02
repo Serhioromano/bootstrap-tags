@@ -44,15 +44,15 @@ Array example `["banana", "strawberry", "apple"]`. Or you can use objects or eve
 `[{id: 1, text: "Apple", html: "This is <b>Apple</b>!"}, {id: 2, text: "Pear"}, "banana"]` where `html` is optional
 key. In objects `id` is used to save, text to display in pill and `html` in typeahead suggestions.
 
-1. First is to path default values as option.
+1. First method is to path default values as option.
 
         $('#bs-tags').tags({values:["banana", "apple"]});
 
-2. Second to provide URL where through `GET` it will fetch default values
+2. Second method to provide URL where through `GET` it will fetch default values
 
         $('#bs-tags').tags({values_url:"urls/defaults.json"});
 
-3. And last is to use callback function
+3. And last method is to use callback function
 
         $('#bs-tags').tags({
             onLoadDefaults:function(values){
