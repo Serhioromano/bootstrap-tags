@@ -1,0 +1,14 @@
+{
+  "name": "bootstrap-tags",
+  "version": "0.0.1",
+  "main": "./css/tags.css ./js/tags.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "~2.3.1",
+    "jquery": "~2.0.0"
+  }
+}
