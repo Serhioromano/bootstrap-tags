@@ -2,16 +2,16 @@
     {
         "id": "2",
         "text": "Apple",
-        "html": "This is <b>Apple</b>!",
+        "html": "You have found Apple",
         "num": 5,
-        "url": "http://tags/",
+        "url": "http://www.apple.com",
         "title": "Click here to see all &quot;records&quot; of only Apple's"
     },
     {
         "id": "3",
         "text": "Mango",
-        "html": "I like <b>Mango</b>!",
-        "url": "/"
+        "html": "You have found <b>Mango</b>!",
+        "url": "http://www.mango.com/"
     },
     {
         "id": "5",

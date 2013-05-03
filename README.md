@@ -89,7 +89,12 @@ can_delete | true | Set if current user can delete tags/pills
 can_add | true | Set if current users can add new tags
 remove_url | | Set URL where `POST` request will be sent on tag/pill removal.
 input_name | tags[] | Set name of the hidden `<input>` element to be added with every tag/pill. It should end with `[]` in order to support multiple values.
+double_hilight | #0B3549 | Color to highlight tag on double entry attempt.
 limit | 0 | Maximum amount of tags to add. 0 - no limits.
+only_suggestions | false | You can allow only add from suggestions and not add new tags/pills.
+suggestion_limit | 15 | Maximum number of suggestions for typeahead.
+suggestion_url | | Url to fetch suggestion. `POST` request will be send with `q` and `limit` parameters. `q` - search string and `limit` - how many suggestions maximum.
+suggestions | [] | Array of suggestion.
 templates | Object | Set HTML markup. This let you fully manage and style output as you want. No limitations. See [Templates](#templates) for more details. 
 
 ## Templates
@@ -106,9 +111,9 @@ You can path template through `templates` option.
 		}
 	});
 	
-Template | Default | Descritpion
+Template | Default | Description
 ---|---|---
-pill | `<span class="badge badge-info" data-tag-id="{1}">{0}</span>` | This is main HTML element of the pill. This is also what will be passed to `onRemove(pill)` method. After full pill creation it will include also hidden `<input>`, number if passed and remove icon. `{0}` is the tag text, `{1}` is the tag id. `data-tag-id` is required attribute.
+pill | `<span class="badge badge-info">{0}</span>` | This is main HTML element of the pill. This is also what will be passed to `onRemove(pill)` method. After full pill creation it will include also hidden `<input>`, number if passed and remove icon. `{0}` is the tag text.
 number |  `<sup><small>{0}</small></sup>` | If `num` property exists in [feed](#feed-format) then number will be added. This is template how to format it.
 delete_icon | `<i class="icon-remove-sign"></i>` | This is delete icon. If you use FontAwesome or IcoMoon you can change it to display better icon. 
 

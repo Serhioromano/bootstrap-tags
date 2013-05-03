@@ -22,19 +22,28 @@
 		<div class="span8">
 			<div id="bs-tags"></div>
 			<style type="text/css">
-				#bs-tags *[data-tag-id] {
+				#bs-tags .badge-tag {
 					margin-right: 5px;
+					margin-bottom: 5px;
 					font-weight: 100;
 					font-size: 14px;
 					line-height: 20px;
 				}
-				#bs-tags *[data-tag-id] a.tag-remove {
+				#bs-tags .tag-icon {
 					margin-left: 5px;
 					margin-right: -3px;
 				}
-				#bs-tags *[data-tag-id] a.tag-link {
+				#bs-tags .badge-tag a.tag-link {
 					color: #ffffff;
 					text-decoration: underline;
+				}
+				#bs-tags .tag-input {
+					border: 0 solid;
+					background-color: transparent;
+					height: 18px;
+					margin-top: -5px;
+					font-weight: 100;
+					color: #ffffff;
 				}
 			</style>
 		</div>
@@ -43,9 +52,14 @@
 
 <script type="text/javascript" src="components/jquery/jquery.js"></script>
 <script type="text/javascript" src="components/bootstrap/docs/assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="components/jquery-color/jquery.color.js"></script>
 <script type="text/javascript" src="js/bootstrap-tags.js"></script>
 <script type="text/javascript">
-	$('#bs-tags').tags({values: ["Banana"], values_url: 'urls/defaults.json'});
+	$('#bs-tags').tags({
+		suggestions: ["Banana", "Durian", "Cocos"],
+		suggestion_url: "urls/suggestions.json.php",
+		values_url: 'urls/defaults.json'
+	});
 </script>
 </body>
 </html>

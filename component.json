@@ -1,17 +1,18 @@
 {
-    "name": "bootstrap-tag-pills",
-    "version": "0.0.1",
-    "main": [
-        "./css/bootstrap-tags.css",
-        "./js/bootstrap-tags.js"
-    ],
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "components"
-    ],
-    "dependencies": {
-        "bootstrap": "~2.3.1",
-        "jquery": "~2.0.0"
-    }
+  "name": "bootstrap-tag-pills",
+  "version": "0.0.1",
+  "main": [
+    "./css/bootstrap-tags.css",
+    "./js/bootstrap-tags.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "~2.3.1",
+    "jquery": "~2.0.0",
+    "jquery-color": "~2.1.2"
+  }
 }
