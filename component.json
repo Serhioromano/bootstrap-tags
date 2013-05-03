@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-tag-pills",
+  "name": "bootstrap-tags-pills",
   "version": "0.0.1",
   "main": [
     "./css/bootstrap-tags.css",

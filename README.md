@@ -1,10 +1,10 @@
 # Bootstrap Tags
 
-> Not yet officially released. Please check back later aprox date is end of May.
-
 In fact it is not tags it sort of mix of typeahead, and tags/pills. I just did not know how to name it in english, I named it after my task I did it to use in my application to manage tags.
 
 Please see [demo](http://bootstrap-tags.azurewebsites.net/) here. Demo is updated automatically on every push to repository so it always contains latest version.
+
+![demo](http://serhioromano.s3.amazonaws.com/github/bs-tags/bs-tags-demo.png)
 
 ## Features
 
@@ -16,7 +16,7 @@ Please see [demo](http://bootstrap-tags.azurewebsites.net/) here. Demo is update
 
 You can install with bower
 
-    $> bower install bootstrap-tags-input
+    $> bower install bootstrap-tags-pills
 
 to see what files to use run
 
