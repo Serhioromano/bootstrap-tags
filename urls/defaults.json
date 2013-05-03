@@ -4,7 +4,8 @@
         "text": "Apple",
         "html": "This is <b>Apple</b>!",
         "num": 5,
-        "url": "http://tags/"
+        "url": "http://tags/",
+        "title": "Click here to see all &quot;records&quot; of only Apple's"
     },
     {
         "id": "3",

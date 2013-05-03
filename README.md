@@ -1,5 +1,7 @@
 # Bootstrap Tags
 
+> Not yet officially released. Please check back later aprox date is end of May.
+
 In fact it is not tags it sort of mix of typeahead, and tags/pills. I just did not know how to name it in english, I named it after my task I did it to use in my application to manage tags.
 
 Please see [demo](http://bootstrap-tags.azurewebsites.net/) here. Demo is updated automatically on every push to repository so it always contains latest version.
@@ -8,6 +10,7 @@ Please see [demo](http://bootstrap-tags.azurewebsites.net/) here. Demo is update
 
 - Based on templates. Thus you can change any HTML markup of any element, and fully control how this UI components looks.
 - Flexible API. There are few methods to make the same thing like pre-populate, remove or add tags/pills. you can use it as standard element with form submission or on fully AJAXed sites.
+- Not only manage tags on the form but in the article or simply fetch(list) tags without management.
 
 ## Install
 
@@ -57,7 +60,8 @@ As for default values or _typeahead_ suggestions the format is the same. It is a
             "id": "3",
             "text": "Mango",
             "html": "I like <b>Mango</b>!",
-            "url": "/"
+            "url": "/",
+            "title": "Click here to see all articles of only Mango's"
         },
         "Banana"
     ]
@@ -71,6 +75,7 @@ text     | Yes      | Used as tag text.
 html     | No       | If not set `text` will be used. This property is used to display in typeahead suggestions.
 num      | No       | If set, number will be shown after the text.
 url      | No       | If set, text will be as link. Not that there is `tag_link_target` option. Eg. `$('#bs-tags').tags({tag_link_target:"_blank"});`
+title    | No       | Title will create Bootstrap tooltip. It will be used only if `url` property exists. 
 
 ## Options
 
@@ -79,12 +84,13 @@ You can use following options when construction element. Like `$('#bs-tags').tag
 Option | Default | Description
 -------|---------|------------
 values | []      | Default values to pre-populate component with tags/pills
-tag\_link\_target || Default target for tags/pills with links. To add link to tag you have to set `url` property in feed object. See _Feed format_ for details.
+tag\_link\_target || Default target for tags/pills with links like `_blank`. To add link to tag you have to set `url` property in feed object. See _Feed format_ for details.
 can_delete | true | Set if current user can delete tags/pills
 can_add | true | Set if current users can add new tags
 remove_url | | Set URL where `POST` request will be sent on tag/pill removal.
 input_name | tags[] | Set name of the hidden `<input>` element to be added with every tag/pill. Ше should end with `[]` in order to support multiple values.
-templates | | Set HTML markup. This let you fully manage and style output as you want. No limitations. See _Templates_ for more details. 
+limit | 0 | Maximum amount of tags to add. 0 - no limits.
+templates | Object | Set HTML markup. This let you fully manage and style output as you want. No limitations. See _Templates_ for more details. 
 
 ## Templates
 
@@ -124,24 +130,16 @@ Final pill may look like this.
 
 Event          | Description
 ---------------|-------------
-onLoadDefaults | Triggered before render element. What you return will be used to pre-populate component with tags/pills   
-onRemove       | Triggered before removing HTML element of tag/pill.
+onLoadDefaults(value) | Triggered before render element. What you return will be used to pre-populate component with tags/pills. `values` is the array of values already populated by other methods.
+onRemove(pill)       | Triggered before removing HTML element of tag/pill. `pill` is an HTML element.
+onError(num, msg)        | This alerts error message by default. But if you have your own error management system you can use this callback. `num` is an error number and `msg` error text.
 
-        templates: {
-            // {0} - text, {1} - id, {2} - delete icon
-            pill: '<span class="badge badge-info" data-tag-id="{1}">{0}</span>',
-            delete_icon: '<i class="icon-remove-sign"></i>',
-            number: ' <sup><small>{0}</small></sup>'
-        },
+Here are errors that can be triggered
 
-        input_name: 'tags[]',
-
-        lang: {
-            delete: "Delete"
-        },
-
-        remove_url: '',
-
+Error | Text
+------|------
+10 | You have reached limit of only {0} tags to be added.
+11 | Not correct object format to create tag/pill
 
 ## Load default values
 

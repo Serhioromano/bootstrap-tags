@@ -7,11 +7,12 @@
         values_url: '',
 
         templates: {
-            // {0} - text, {1} - id, {2} - delete icon
             pill: '<span class="badge badge-info" data-tag-id="{1}">{0}</span>',
             delete_icon: '<i class="icon-remove-sign"></i>',
             number: ' <sup><small>{0}</small></sup>'
         },
+
+        limit: 0,
 
         tag_link_target: '', // may be _blank or other.
 
@@ -21,7 +22,8 @@
         input_name: 'tags[]',
 
         lang: {
-            delete: "Delete"
+            delete: "Delete",
+            limit: "You have reached limit of only {0} tags to be added."
         },
 
         remove_url: '',
@@ -30,6 +32,9 @@
             return values;
         },
         onRemove: function(pill) {
+        },
+        onError: function(num, msg) {
+            alert(msg);
         }
 
     };
@@ -49,7 +54,7 @@
         }
         options.values = options.onLoadDefaults(options.values);
 
-        var pills_list = $(document.createElement('div')).appendTo(context);
+        var pills_list = $(document.createElement('div')).addClass('pills-list').appendTo(context);
 
         $.each(options.values, function(key, value) {
             $self.addTag(pills_list, value);
@@ -61,19 +66,27 @@
     Tags.prototype.addTag = function(pills_list, value) {
         var $self = this;
 
+        if(parseInt(options.limit) > 0 && pills_list.children().length >= parseInt(options.limit)) {
+            options.onError(10, options.lang.limit.format(options.limit));
+            return;
+        }
+
         if(typeof value == "string") {
             value = {id: value, text: value, html: value};
         }
         value.html = value.html || value.text;
         value.url = value.url || '';
+        value.title = value.title || '';
         value.num = parseInt(value.num || '0');
 
         if(!value.id || !value.text) {
+            options.onError(11, 'Not correct object format to create tag/pill');
             $.error('Not correct object format to create tag/pill');
         }
 
         if(value.url) {
-            value.text = '<a class="tag-link" target="' + options.tag_link_target + '" href="' + value.url + '">' + value.text + '</a>';
+            var title = value.title ? ' data-toggle="tooltip" title="' + value.title + '"' : '';
+            value.text = '<a class="tag-link" ' + title + ' target="' + options.tag_link_target + '" href="' + value.url + '">' + value.text + '</a>';
         }
 
         var icon = '';
