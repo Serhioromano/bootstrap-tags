@@ -138,6 +138,7 @@ Event          | Description
 `onRemove(pill)`       | Triggered before removing HTML element of tag/pill. `pill` is an HTML element.
 `onError(num, msg)`       | This alerts error message by default. But if you have your own error management system you can use this callback. `num` is an error number and `msg` error text.
 `onBeforeAdd(pill, value)` | This is triggered before pill HTML element appended to list. This method has to return `pill`. `pill` is an HTML element and `value` is tag object with all properties like `is`, `text`, `html`, `url`, ...  It will also contain all other custom properties you add to _[feed](#feed-format)_.
+`onLoadSuggestions(values)` | The same as `onLoadDefaults` but for typeahead suggestions.
 
 Here are errors that can be triggered
 
