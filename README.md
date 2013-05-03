@@ -84,13 +84,13 @@ You can use following options when construction element. Like `$('#bs-tags').tag
 Option | Default | Description
 -------|---------|------------
 values | []      | Default values to pre-populate component with tags/pills
-tag\_link\_target || Default target for tags/pills with links like `_blank`. To add link to tag you have to set `url` property in feed object. See _Feed format_ for details.
+tag\_link\_target || Default target for tags/pills with links like `_blank`. To add link to tag you have to set `url` property in feed object. See [Feed format](#feed-format) for details.
 can_delete | true | Set if current user can delete tags/pills
 can_add | true | Set if current users can add new tags
 remove_url | | Set URL where `POST` request will be sent on tag/pill removal.
-input_name | tags[] | Set name of the hidden `<input>` element to be added with every tag/pill. Ше should end with `[]` in order to support multiple values.
+input_name | tags[] | Set name of the hidden `<input>` element to be added with every tag/pill. It should end with `[]` in order to support multiple values.
 limit | 0 | Maximum amount of tags to add. 0 - no limits.
-templates | Object | Set HTML markup. This let you fully manage and style output as you want. No limitations. See _Templates_ for more details. 
+templates | Object | Set HTML markup. This let you fully manage and style output as you want. No limitations. See [Templates](#templates) for more details. 
 
 ## Templates
 
@@ -106,14 +106,11 @@ You can path template through `templates` option.
 		}
 	});
 	
-![pill template](http://serhioromano.s3.amazonaws.com/github/bs-tags/bs-tags-template.png)
-
 Template | Default | Descritpion
 ---|---|---
 pill | `<span class="badge badge-info" data-tag-id="{1}">{0}</span>` | This is main HTML element of the pill. This is also what will be passed to `onRemove(pill)` method. After full pill creation it will include also hidden `<input>`, number if passed and remove icon. `{0}` is the tag text, `{1}` is the tag id. `data-tag-id` is required attribute.
-number |  `<sup><small>{0}</small></sup>` | If `num` property exists in _feed_ then number will be added. This is template how to format it.
+number |  `<sup><small>{0}</small></sup>` | If `num` property exists in [feed](#feed-format) then number will be added. This is template how to format it.
 delete_icon | `<i class="icon-remove-sign"></i>` | This is delete icon. If you use FontAwesome or IcoMoon you can change it to display better icon. 
-
 
 Final pill may look like this.
 
@@ -126,13 +123,16 @@ Final pill may look like this.
 		<input data-tag-hidden="2" name="tags[]" type="hidden" value="2">
 	</span>
 
+![pill template](http://serhioromano.s3.amazonaws.com/github/bs-tags/bs-tags-template.png)
+
 ## Events
 
 Event          | Description
 ---------------|-------------
-onLoadDefaults(value) | Triggered before render element. What you return will be used to pre-populate component with tags/pills. `values` is the array of values already populated by other methods.
-onRemove(pill)       | Triggered before removing HTML element of tag/pill. `pill` is an HTML element.
-onError(num, msg)        | This alerts error message by default. But if you have your own error management system you can use this callback. `num` is an error number and `msg` error text.
+`onLoadDefaults(value)` | Triggered before render element. What you return will be used to pre-populate component with tags/pills. `values` is the array of values already populated by other methods.
+`onRemove(pill)`       | Triggered before removing HTML element of tag/pill. `pill` is an HTML element.
+`onError(num, msg)`       | This alerts error message by default. But if you have your own error management system you can use this callback. `num` is an error number and `msg` error text.
+`onBeforeAdd(pill, value)` | This is triggered before pill HTML element appended to list. This method has to return `pill`. `pill` is an HTML element and `value` is tag object with all properties like `is`, `text`, `html`, `url`, ...  It will also contain all other custom properties you add to _[feed](#feed-format)_.
 
 Here are errors that can be triggered
 

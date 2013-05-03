@@ -35,28 +35,33 @@
         },
         onError: function(num, msg) {
             alert(msg);
+        },
+        onBeforeAdd: function(pill, value) {
+            return pill;
         }
 
     };
-    var options = {};
 
-    function Tags(context) {
+    function Tags(context, params) {
+
+        this.options = $.extend(true, {}, defaults, params);
+
         var $self = this;
 
-        if(options.values_url) {
+        if($self.options.values_url) {
             $.ajax({
-                dataType: 'json', type: 'get', async: false, url: options.values_url
+                dataType: 'json', type: 'get', async: false, url: $self.options.values_url
             }).done(function(json) {
                     if(typeof json == "object") {
-                        options.values = $.merge(options.values, json);
+                        $self.options.values = $.merge($self.options.values, json);
                     }
                 });
         }
-        options.values = options.onLoadDefaults(options.values);
+        $self.options.values = $self.options.onLoadDefaults($self.options.values);
 
         var pills_list = $(document.createElement('div')).addClass('pills-list').appendTo(context);
 
-        $.each(options.values, function(key, value) {
+        $.each($self.options.values, function(key, value) {
             $self.addTag(pills_list, value);
         });
 
@@ -66,8 +71,8 @@
     Tags.prototype.addTag = function(pills_list, value) {
         var $self = this;
 
-        if(parseInt(options.limit) > 0 && pills_list.children().length >= parseInt(options.limit)) {
-            options.onError(10, options.lang.limit.format(options.limit));
+        if(parseInt($self.options.limit) > 0 && pills_list.children().length >= parseInt($self.options.limit)) {
+            $self.options.onError(10, $self.options.lang.limit.format($self.options.limit));
             return;
         }
 
@@ -80,62 +85,64 @@
         value.num = parseInt(value.num || '0');
 
         if(!value.id || !value.text) {
-            options.onError(11, 'Not correct object format to create tag/pill');
+            $self.options.onError(11, 'Not correct object format to create tag/pill');
             $.error('Not correct object format to create tag/pill');
         }
 
         if(value.url) {
             var title = value.title ? ' data-toggle="tooltip" title="' + value.title + '"' : '';
-            value.text = '<a class="tag-link" ' + title + ' target="' + options.tag_link_target + '" href="' + value.url + '">' + value.text + '</a>';
+            value.text = '<a class="tag-link" ' + title + ' target="' + $self.options.tag_link_target + '" href="' + value.url + '">' + value.text + '</a>';
         }
 
         var icon = '';
-        if(options.can_delete) {
+        if($self.options.can_delete) {
             icon = $(document.createElement('a'))
                 .attr({
                     "href": "javascript:void(0)",
                     "class": "tag-remove",
                     "data-toggle": "tooltip",
-                    "title": options.lang.delete
+                    "title": $self.options.lang.delete
                 })
-                .html(options.templates.delete_icon.toString())
+                .html($self.options.templates.delete_icon.toString())
                 .click(function() {
                     $self.removeTag(this);
                 });
         }
 
-        var num = value.num > 0 ? options.templates.number.format(value.num) : '';
+        var num = value.num > 0 ? $self.options.templates.number.format(value.num) : '';
 
-        var tag = $(options.templates.pill.format(value.text, value.id))
+        var tag = $($self.options.templates.pill.format(value.text, value.id))
             .append(num, icon, $(document.createElement('input'))
                 .attr({
                     "data-tag-hidden": value.id,
-                    "name": options.input_name,
+                    "name": $self.options.input_name,
                     "type": "hidden",
                     "value": value.id
                 })
             );
 
+        tag = $self.options.onBeforeAdd(tag, value);
+
         pills_list.append(tag);
     }
 
     Tags.prototype.removeTag = function(tag) {
+        var $self = this;
         $(tag).closest('[data-tag-id]').animate({width: 0, "padding-right": 0, "padding-left": 0}, 200, 'swing', function() {
             var $this = $(this);
-            if(options.remove_url) {
+            if($self.options.remove_url) {
                 $.ajax({
-                    dataType: 'json', type: 'post', async: false, url: options.remove_url, data: {id: $this.data('tag-id')}
+                    dataType: 'json', type: 'post', async: false, url: $self.options.remove_url, data: {id: $this.data('tag-id')}
                 });
             }
-            options.onRemove($this);
+            $self.options.onRemove($this);
             $this.remove();
         });
     }
 
     $.fn.tags = function(params) {
-        options = $.extend(true, {}, defaults, params);
         return this.each(function() {
-            new Tags($(this));
+            new Tags($(this), params);
         })
     }
 }(window.jQuery));
