@@ -1,10 +1,7 @@
 {
   "name": "bootstrap-tags-pills",
-  "version": "0.0.1",
-  "main": [
-    "./css/bootstrap-tags.css",
-    "./js/bootstrap-tags.js"
-  ],
+  "version": "0.0.2",
+  "main": "./js/bootstrap-tags.js",
   "ignore": [
     "**/.*",
     "node_modules",

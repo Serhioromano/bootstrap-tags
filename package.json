@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-tags",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Bootstrap styled tag pills",
     "main": "index.js",
     "scripts": {

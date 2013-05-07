@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+        "text": "<img src='http://www.gravatar.com/avatar/dfadca86f3bc1649e23ace6583f91cbf?s=32&d=identicon&r=PG' align='left' class='img-circle img-polaroid' hspace=5>John Doe<br><small>John status message</small>",
+        "suggest": "John Doe",
+        "url": "http://www.johndoe.com"
+    },
+    {
+        "id": "2",
+        "text": "<img src='http://www.gravatar.com/avatar/6f9af44bed25a311fe2b9846c61048b3?s=32&d=identicon&r=PG' align='left' class='img-circle img-polaroid' hspace=5>Sergey Romanov<br><small>my very long status, may be will work this time...</small>",
+        "suggest": "Sergey Romanov",
+        "url": "http://www.sergey.com"
+    }
+]

@@ -7,11 +7,12 @@
         values_url: '',
 
         templates: {
-            pill: '<span class="badge badge-info badge-tag">{0}</span>',
-            add_pill: '<span class="badge badge-success badge-tag"></span>',
+            pill: '<span class="badge badge-info tag-badge">{0}</span>',
+            add_pill: '<span class="badge badge-success tag-badge">...</span>',
+            input_pill: '<span class="badge badge-success tag-badge"></span>',
             number: ' <sup><small>{0}</small></sup>',
             plus_icon: '<i class="icon-plus-sign tag-icon"></i>',
-            delete_icon: '<i class="icon-remove-sign tag-icon"></i>',
+            delete_icon: '<i class="icon-remove-sign tag-icon" data-toggle="tooltip" title="Delete"></i>',
             ok_icon: '<i class="icon-ok-sign tag-icon"></i>'
         },
 
@@ -86,13 +87,13 @@
 
             var input = $(document.createElement('input'))
                 .addClass('tag-input')
-                .attr({"autocomplete": "off"})
+                .attr({"autocomplete": "off", "type": "text"})
                 .css('outline', 'none')
                 .typeahead({
                     items: $self.options.suggestion_limit,
                     source: function(query, process) {
 
-                        var suggestions = $self.options.suggestions;
+                        var suggestions = $.merge([], $self.options.suggestions);
                         labels = [];
                         mapped = {};
 
@@ -111,8 +112,8 @@
                         suggestions = $self._prepare(suggestions);
 
                         $.each(suggestions, function(i, item) {
-                            mapped[item.html] = item
-                            labels.push(item.html)
+                            mapped[item.suggest] = item
+                            labels.push(item.suggest)
                         });
 
                         return labels;
@@ -134,7 +135,9 @@
                 });
             }
 
-            var add = $($self.options.templates.add_pill)
+
+
+            var add = $($self.options.templates.input_pill)
                 .append(input)
                 .append($($self.options.templates.ok_icon)
                     .css('cursor', 'pointer')
@@ -150,7 +153,6 @@
             var wait = $($self.options.templates.add_pill)
                 .addClass('add-pill')
                 .css('cursor', 'pointer')
-                .html('...')
                 .append($(document.createElement('span'))
                     .attr({})
                     .addClass('tag-add')
@@ -183,9 +185,9 @@
                 return true;
             }
             if(typeof value == "string") {
-                values[key] = {id: value, text: value, html: value};
+                values[key] = {id: value, text: value, suggest: value};
             }
-            values[key].html = values[key].html || values[key].text;
+            values[key].suggest = values[key].suggest || values[key].text;
             values[key].url = value.url || '';
             values[key].title = value.title || '';
             values[key].num = parseInt(value.num || '0');
@@ -228,7 +230,9 @@
         if(unique) {
             var color = $(pills_list.children()[0]).css('background-color');
             unique.stop().animate({"backgroundColor": $self.options.double_hilight}, 100, 'swing', function() {
-                unique.stop().animate({"backgroundColor": color}, 100)
+                unique.stop().animate({"backgroundColor": color}, 100, 'swing', function(){
+                   unique.css('background-color', '');
+                });
             });
             return false;
         }
@@ -243,9 +247,7 @@
             icon = $(document.createElement('a'))
                 .attr({
                     "href": "javascript:void(0)",
-                    "class": "tag-remove",
-                    "data-toggle": "tooltip",
-                    "title": $self.options.lang.delete
+                    "class": "tag-remove"
                 })
                 .html($self.options.templates.delete_icon.toString())
                 .click(function() {
@@ -264,7 +266,11 @@
                     "type": "hidden",
                     "value": value.id
                 })
-            );
+            )
+            .css({
+                "overflow": "hidden",
+                "white-space": "nowrap"
+            });
 
         tag = $self.options.onBeforeAdd(tag, value);
 

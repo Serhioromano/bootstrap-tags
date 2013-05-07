@@ -22,7 +22,7 @@
 		<div class="span8">
 			<div id="bs-tags"></div>
 			<style type="text/css">
-				#bs-tags .badge-tag {
+				#bs-tags .tag-badge {
 					margin-right: 5px;
 					margin-bottom: 5px;
 					font-weight: 100;
@@ -33,18 +33,65 @@
 					margin-left: 5px;
 					margin-right: -3px;
 				}
-				#bs-tags .badge-tag a.tag-link {
+				#bs-tags .tag-badge a.tag-link {
 					color: #ffffff;
 					text-decoration: underline;
 				}
 				#bs-tags .tag-input {
 					border: 0 solid;
+					margin: 0;
+					padding: 0;
+					font-weight: 100;
+					border: 0 solid;
 					background-color: transparent;
 					height: 18px;
 					margin-top: -5px;
-					font-weight: 100;
 					color: #ffffff;
+					outline: none;
 				}
+			</style>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4"><h3>Custom tags</h3>
+		<p>This is example how you can customize tags to anything you like</p>
+		</div>
+		<div class="span8">
+			<div id="bs-tags-custom"></div>
+			<style type="text/css">
+				#bs-tags-custom .pills-list {
+					display: block;
+				}
+				#bs-tags-custom .tag-badge {
+					margin-right: 10px;
+					margin-bottom: 10px;
+					border-radius: 8px;
+					border: 2px dashed transparent;
+					background-color: #f5f5f5;
+					width: 175px;
+					line-height: 20px;
+					padding: 5px;
+					text-overflow: ellipsis;
+					position: relative;
+				}
+				#bs-tags-custom .tag-badge a.tag-link {
+					color: #151515;
+				}
+				#bs-tags-custom .tag-badge:hover {
+					border: 2px dashed #c4ca65;
+					background-color: #e8ee80;
+
+				}
+				#bs-tags-custom .tag-badge:hover a.tag-link {
+					text-decoration: none;
+					color: #555b2b;
+				}
+				#bs-tags-custom .tag-remove {
+					position: absolute;
+					top: -2px;
+					right: 2px;
+				}
+
 			</style>
 		</div>
 	</div>
@@ -59,6 +106,22 @@
 		suggestions: ["Banana", "Durian", "Cocos"],
 		suggestion_url: "urls/suggestions.json.php",
 		values_url: 'urls/defaults.json'
+	});
+
+	$('#bs-tags-custom').tags({
+		double_hilight: '#C4CA65',
+		only_suggestions: true,
+		suggestion_url: "urls/user_suggestions.json.php",
+		templates: {
+			pill: '<div class="pull-left tag-badge">{0}</div>',
+			add_pill: '<div class="tag-form"></div>',
+			input_pill: '<div class="tag-form input-append"></div>',
+			number: ' <sup><small>{0}</small></sup>',
+			plus_icon: '<button class="btn"><i class="icon-plus-sign"></i></button>',
+			delete_icon: '<i class="icon-remove-sign tag-icon"></i>',
+			ok_icon: '<button class="btn"><i class="icon-ok-sign tag-icon"></i></button>'
+		},
+		values_url: 'urls/default_users.json'
 	});
 </script>
 </body>
