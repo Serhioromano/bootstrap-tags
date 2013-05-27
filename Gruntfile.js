@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\nhttps://github.com/Serhioromano/bootstrap-calendar.git\n'
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\nhttps://github.com/Serhioromano/bootstrap-tags.git\n'
             },
             build: {
                 src: 'js/bootstrap-tags.js',

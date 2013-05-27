@@ -122,7 +122,7 @@ Property | Required | Description
 ---------|----------|------------
 id       | Yes      | Required only if object. If it is a string, the same value for `text` and `id` will be used.
 text     | Yes      | Used as tag text.
-suggest     | No       | If not set `text` will be used. This property is used to display in typeahead suggestions.
+suggest  | No       | If not set `text` will be used. This property is used to display in typeahead suggestions.
 num      | No       | If set, number will be shown after the text.
 url      | No       | If set, text will be as link. Not that there is `tag_link_target` option. Eg. `$('#bs-tags').tags({tag_link_target:"_blank"});`
 title    | No       | Title will create Bootstrap tooltip. It will be used only if `url` property exists. 
