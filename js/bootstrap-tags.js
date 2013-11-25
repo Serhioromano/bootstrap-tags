@@ -214,7 +214,7 @@
             return false;
         }
 
-        if(!value.id || !value.text) {
+        if(typeof value.id === 'undefined' || typeof value.text === 'undefined') {
             $self.options.onError(11, 'Not correct object format to create tag/pill');
             $.error('Not correct object format to create tag/pill');
         }
