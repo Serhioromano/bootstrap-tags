@@ -128,10 +128,11 @@
                 });
 
             if($self.options.only_suggestions == false) {
-                input.keyup(function(e) {
+                input.keypress(function(e) {
                     if(!$(this).val()) return;
                     if(e.keyCode == 13) {
                         $self._addTag(pills_list, $(this));
+                        return false;
                     }
                 });
             }
