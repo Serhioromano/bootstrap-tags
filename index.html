@@ -107,6 +107,48 @@
 			</style>
 		</div>
 	</div>
+	<div class="row">
+		<div class="span4"><h3>Tags in a Form</h3>
+			<p>This is an example of including tags in a form and using a custom function when duplicate tags are added.</p>
+		</div>
+		<form >
+			<div id="bs-tags-form"></div>
+			<button type="submit" class="btn">Submit</button>
+			<style type="text/css">
+				button {
+					margin-left: 30%;
+				}
+				#bs-tags-form .tag-badge {
+					margin-right: 5px;
+					margin-bottom: 5px;
+					font-weight: 100;
+					font-size: 14px;
+					line-height: 20px;
+				}
+				#bs-tags-form .tag-icon {
+					margin-left: 5px;
+					margin-right: -3px;
+				}
+				#bs-tags-form .tag-badge a.tag-link {
+					color: #ffffff;
+					text-decoration: underline;
+				}
+				#bs-tags-form .tag-input {
+					border: 0 solid;
+					margin: 0;
+					padding: 0;
+					font-weight: 100;
+					border: 0 solid;
+					background-color: transparent;
+					height: 18px;
+					margin-top: -5px;
+					color: #ffffff;
+					outline: none;
+				}
+			</style>
+		</form>
+	</div>
+</div>
 	<br><br>
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
@@ -148,6 +190,15 @@
 			ok_icon: '<button class="btn"><i class="icon-ok-sign tag-icon"></i></button>'
 		},
 		values_url: 'urls/default_users.json'
+	});
+	$('#bs-tags-form').tags({
+		suggestions: ["Banana", "Durian", "Cocos"],
+		suggestion_url: "urls/suggestions.json.php",
+		values_url: 'urls/defaults.json',
+		onDuplicate: function(original, duplicate){
+			$(original).hide().fadeIn();
+			return false;
+		}
 	});
 </script>
 </body>

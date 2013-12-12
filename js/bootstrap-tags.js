@@ -53,7 +53,8 @@
         },
         onLoadSuggestions: function(values) {
             return values;
-        }
+        },
+        onDuplicate: null
     }
 
 
@@ -228,13 +229,19 @@
         });
 
         if(unique) {
-            var color = $(pills_list.children()[0]).css('background-color');
-            unique.stop().animate({"backgroundColor": $self.options.double_hilight}, 100, 'swing', function() {
-                unique.stop().animate({"backgroundColor": color}, 100, 'swing', function(){
-                   unique.css('background-color', '');
+            if(!$self.options.onDuplicate){
+                var color = $(pills_list.children()[0]).css('background-color');
+                unique.stop().animate({"backgroundColor": $self.options.double_hilight}, 100, 'swing', function() {
+                    unique.stop().animate({"backgroundColor": color}, 100, 'swing', function(){
+                        unique.css('background-color', '');
+                    });
                 });
-            });
-            return false;
+                return false;
+            } else {
+                if($self.options.onDuplicate(unique, value) != true) {
+                    return false;
+                }
+            }
         }
 
         if(value.url) {
