@@ -251,6 +251,24 @@ This event is triggered after `suggestions_url` has been fetched right before sh
 
 The same as `onLoadDefaults` but for typeahead suggestions.
 
+-----------------------------------------------------
+
+###onDuplicate
+
+This event is triggered as a duplicate tag is being added. This method can return true or false. If the method returns true the the duplicate tag is added, however, if the method returns false the duplicate tag will not be added. By default the tag is not added and a small visual effect is used to alert the user. Two parameters are passed to the callback:
+
+- `original` - The first tag in the list that is equal to the tag that is being added
+- `duplicate` - The value of the tag that is being added
+
+**Example**
+
+    $('#bs-tags').tags({
+        onDuplicate: function(original, duplicate){
+            //do something...
+        }
+    });
+
+-----------------------------------------------------
 
 ## Examples
 ### Load default values
