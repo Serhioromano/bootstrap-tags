@@ -54,7 +54,10 @@
         onLoadSuggestions: function(values) {
             return values;
         },
-        onDuplicate: null
+        onDuplicate: null,
+        onBeforeRemove: function(pill) {
+            return true;
+        }
     }
 
 
@@ -291,7 +294,13 @@
 
     Tags.prototype.removeTag = function(tag) {
         var $self = this;
-        $(tag).closest('[data-tag-id]').animate({width: 0, "padding-right": 0, "padding-left": 0}, 200, 'swing', function() {
+        var $tag = $(tag).closest('[data-tag-id]');
+        
+        if($self.options.onBeforeRemove($tag) === false) {
+            return;
+        }
+
+        $tag.animate({width: 0, "padding-right": 0, "padding-left": 0}, 200, 'swing', function() {
             var $this = $(this);
             if($self.options.remove_url) {
                 $.ajax({
