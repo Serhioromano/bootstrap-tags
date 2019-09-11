@@ -8,19 +8,29 @@ Please see [demo](http://bootstrap-tags.azurewebsites.net/) here. Demo is update
 
 ## TOC
 
-* [Features](#features)
-* [Install](#install)
-* [How to use](#how-to-use)
-* [Feed format](#feed-format)
-* [Options](#options)
-* [Templates](#templates)
-* [Events](#events)
-* [Examples](#examples)
-	* [Load default values](#load-default-values)
-	* [Remove tag pill](#remove-tagpill)
-	* [Load suggestions](#load-suggestions)
-* [Roadmap](#roadmap)
-* [Changelog](#changelog)
+- [Bootstrap Tags](#bootstrap-tags)
+	- [TOC](#toc)
+	- [Features](#features)
+	- [Install](#install)
+	- [How to use](#how-to-use)
+	- [Feed format](#feed-format)
+	- [Options](#options)
+	- [Templates](#templates)
+	- [Events](#events)
+		- [onLoadDefaults(values)](#onloaddefaultsvalues)
+		- [onRemove(pill)](#onremovepill)
+		- [onError(num, msg)](#onerrornum-msg)
+		- [onBeforeAdd(pill, item)](#onbeforeaddpill-item)
+		- [onLoadSuggestions(values)](#onloadsuggestionsvalues)
+	- [Examples](#examples)
+		- [Load default values](#load-default-values)
+		- [Remove tag/pill](#remove-tagpill)
+		- [Load suggestions](#load-suggestions)
+	- [Roadmap](#roadmap)
+	- [Changelog](#changelog)
+			- [1.0.0 - beta](#100---beta)
+			- [0.0.2 - beta](#002---beta)
+			- [0.0.1 - beta](#001---beta)
 
 ## Features
 
@@ -53,47 +63,20 @@ to see what files to use run
     </head>
     <body>
         <div id="bs-tags"></div>
-        <style type="text/css">
-			#bs-tags .tag-badge {
-				margin-right: 5px;
-				margin-bottom: 5px;
-				font-weight: 100;
-				font-size: 14px;
-				line-height: 20px;
-			}
-			#bs-tags .tag-icon {
-				margin-left: 5px;
-				margin-right: -3px;
-			}
-			#bs-tags .tag-badge a.tag-link {
-				color: #ffffff;
-				text-decoration: underline;
-			}
-			#bs-tags .tag-input {
-				border: 0 solid;
-				margin: 0;
-				padding: 0;
-				font-weight: 100;
-				border: 0 solid;
-				background-color: transparent;
-				height: 18px;
-				margin-top: -5px;
-				color: #ffffff;
-				outline: none;
-			}
-		</style>
     </div>
 
-    <script type="text/javascript" src="components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="components/bootstrap/docs/assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrap-tags.js"></script>
+    <script type="text/javascript" src="components/jquery.min.js"></script>
+	<script type="text/javascript" src="components/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="components/bootstrap3-typeahead.js"></script>
+	<script type="text/javascript" src="components/jquery.color.js"></script>
+	<script type="text/javascript" src="js/bootstrap-tags.js"></script>
     <script type="text/javascript">
         $('#bs-tags').tags({});
     </script>
     </body>
     </html>
 
-The minimal requirements are Bootstrap and jQuery loaded and `bootstrap-tags.js`. There is not css file for this element. Just use default style here and you can make your adjustment to it. It is already in roadmap to make this element themable.
+The minimal requirements are Bootstrap, jQuery and bootstrap3-typeahead loaded and `bootstrap-tags.js`. There is not css file for this element. Just use default style here and you can make your adjustment to it. It is already in roadmap to make this element themable.
 
 ## Feed format
 
@@ -102,13 +85,13 @@ As for default values or _typeahead_ suggestions the format is the same. It is a
     [
         {
             "id": "1",
-            "text": "Apple",
+            "name": "Apple",
             "suggest": "Apple (5)",
             "num": 5
         },
         {
             "id": "3",
-            "text": "Mango",
+            "name": "Mango",
             "suggest": "mango (10)",
             "url": "/",
             "title": "Click here to see all articles of only Mango's"
@@ -120,12 +103,12 @@ Object may contain following properties
 
 Property | Required | Description
 ---------|----------|------------
-id       | Yes      | Required only if object. If it is a string, the same value for `text` and `id` will be used.
-text     | Yes      | Used as tag text.
-suggest  | No       | If not set `text` will be used. This property is used to display in typeahead suggestions.
-num      | No       | If set, number will be shown after the text.
-url      | No       | If set, text will be as link. Not that there is `tag_link_target` option. Eg. `$('#bs-tags').tags({tag_link_target:"_blank"});`
-title    | No       | Title will create Bootstrap tooltip. It will be used only if `url` property exists. 
+`id`       | Yes      | Required only if object. If it is a string, the same value for `text` and `id` will be used.
+`name`     | Yes      | Used as tag text.
+`suggest`  | No       | If not set `text` will be used. This property is used to display in typeahead suggestions.
+`num`      | No       | If set, number will be shown after the text.
+`url`      | No       | If set, text will be as link. Not that there is `tag_link_target` option. Eg. `$('#bs-tags').tags({tag_link_target:"_blank"});`
+`title`    | No       | Title will create Bootstrap tooltip. It will be used only if `url` property exists. 
 
 ## Options
 
@@ -147,6 +130,7 @@ suggestion_limit | 15 | Maximum number of suggestions for typeahead.
 suggestion_url | | Url to fetch suggestion. `POST` request will be send with `q` and `limit` parameters. `q` - search string and `limit` - how many suggestions maximum.
 suggestions | [] | Array of suggestion.
 templates | Object | Set HTML markup. This let you fully manage and style output as you want. No limitations. See [Templates](#templates) for more details. 
+placeholder | String | Placeholder for input element.
 
 ## Templates
 
@@ -164,24 +148,25 @@ You can path template through `templates` option.
 	
 Template | Default | Description
 ---|---|---
-pill | `<span class="badge badge-info">{0}</span>` | This is main HTML element of the pill. This is also what will be passed to `onRemove(pill)` method. After full pill creation it will include also hidden `<input>`, number if passed and remove icon. `{0}` is the tag text.
-add_pill | `<span class="badge badge-success tag-badge">...</span>` | Main wrapper for pill with button to show input
-input_pill | `<span class="badge badge-success tag-badge"></span>` | Main wrapper for typeahead input
+pill | `<span class="badge badge-info badge-pill tag-badge p-3 mr-2">{0}</span>` | This is main HTML element of the pill. This is also what will be passed to `onRemove(pill)` method. After full pill creation it will include also hidden `<input>`, number if passed and remove icon. `{0}` is the tag text.
+add_pill | `<span class="badge badge-success badge-pill p-2 tag-badge">...</span>` | Main wrapper for pill with button to show input
+input_pill | `<div class="d-none input-group mt-2" style="min-width:200px"></div>` | Main wrapper for typeahead input
 number |  `<sup><small>{0}</small></sup>` | If `num` property exists in [feed](#feed-format) then number will be added. This is template how to format it.
-delete_icon | `<i class="icon-remove-sign"></i>` | This is delete icon. If you use FontAwesome or IcoMoon you can change it to display better icon. 
-plus_icon | `<i class="icon-plus-sign tag-icon"></i>` | Icon to show tag input
-ok_icon | `<i class="icon-ok-sign tag-icon"></i>` | Icon to confirm entered tag
+delete_icon | `<i class="icon icon-plus"></i>` | This is delete icon. If you use FontAwesome or IcoMoon you can change it to display better icon.
+plus_icon | `<i class="ml-2 icon icon-cancel"></i>` | Icon to show tag input
+ok_icon | `<div class="input-group-append"><span class="input-group-text"><i class="icon icon-ok"></i></span></div>` | Icon to confirm entered tag
+input | `<input data-provide="typeahead" class="tag-input typeahead form-control" autocomplete="off" type="text">` | Input element to search tags
 
 Final pill may look like this.
 
-	<span class="badge badge-info" data-tag-id="2">
-		<a class="tag-link" target="" href="http://tags/">Apple</a> 
-		<sup><small>5</small></sup>
-		<a href="javascript:void(0)" class="tag-remove" data-toggle="tooltip" title="Delete">
-			<i class="icon-remove-sign"></i>
-		</a>
-		<input data-tag-hidden="2" name="tags[]" type="hidden" value="2">
-	</span>
+```html
+<span class="badge badge-info badge-pill tag-badge p-3 mr-2" data-tag-id="2">
+	<a class="tag-link" data-toggle="tooltip" title="" target="" href="http://www.apple.com" data-original-title="Click here to see all &quot;records&quot; of only Apple's">Apple</a> 
+	<sup><small>5</small></sup>
+	<a href="javascript:void(0)" class="tag-remove"><i class="ml-2 icon icon-cancel"></i></a>
+	<input data-tag-hidden="2" name="tags[]" type="hidden" value="2">
+</span>
+```
 
 ![pill template](http://serhioromano.s3.amazonaws.com/github/bs-tags/bs-tags-template.png)
 
@@ -362,6 +347,10 @@ There are 3 methods to load suggestions to typeahead dropdown.
 - themable interface. jQuery UI theme.
 
 ## Changelog
+
+#### 1.0.0 - beta
+
+- switch to bootstrap 4
 
 #### 0.0.2 - beta
 

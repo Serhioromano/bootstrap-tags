@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Bootstrap tags - pills UI component</title>
-	<link rel="stylesheet" href="components/bootstrap/docs/assets/css/bootstrap.css"/>
-	<link rel="stylesheet" href="css/bootstrap-tags.css"/>
+	<link rel="stylesheet" href="components/bootstrap.css"/>
+	<link rel="stylesheet" href="css/fontello-d1d7d531/css/fontello.css"/>
 </head>
 <body>
-<div class="container">
-	<div class="hero-unit">
-		<h1>Bootstrap Tags Demo</h1>
-		<p>Bootstrap tags is an UI component to manage values with Ajax</p>
+<div class="container pt-5">
+	<div class="card mb-5 bg-light p-5">
+		<h1 class="display-4">Bootstrap Tags Demo</h1>
+		<p class="lead">Bootstrap tags is an UI component based on Bootstrap 4 and jQuery to create dynamic pills list element.</p>
 		<style type="text/css">
 			.btn-twitter {
 				padding-left: 30px;
@@ -20,137 +20,107 @@
 			}
 		</style>
 		<p>
-			<a href="https://github.com/Serhioromano/bootstrap-tags" class="btn btn-inverse">Fork on GitHub</a>
 			<a class="btn btn-success" href="https://github.com/Serhioromano/bootstrap-tags/blob/master/README.md">Documentation</a>
-			<a href="https://twitter.com/serhioromano" class="btn btn-twitter" data-show-count="false" data-size="large">Follow @serhioromano</a>
+			<a href="https://github.com/Serhioromano/bootstrap-tags" class="btn btn-light">Fork on GitHub</a>
+			<a href="https://twitter.com/serhioromano" class="btn btn-light btn-sm btn-twitter" data-show-count="false" data-size="large">Follow @serhioromano</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 			</script>
 		</p>
 	</div>
 	<div class="row">
-		<div class="span4"><h3>Standard demo</h3>
-		<p>Simple tags with default options</p>
+		<div class="col-4"><h3>Standard demo</h3>
+		<p class="small">Simple tags with default options and few lines of CSS.</p>
 		</div>
-		<div class="span8">
-			<div id="bs-tags"></div>
-			<style type="text/css">
-				#bs-tags .tag-badge {
-					margin-right: 5px;
-					margin-bottom: 5px;
-					font-weight: 100;
-					font-size: 14px;
-					line-height: 20px;
-				}
-				#bs-tags .tag-icon {
-					margin-left: 5px;
-					margin-right: -3px;
-				}
-				#bs-tags .tag-badge a.tag-link {
-					color: #ffffff;
-					text-decoration: underline;
-				}
-				#bs-tags .tag-input {
-					border: 0 solid;
-					margin: 0;
-					padding: 0;
-					font-weight: 100;
-					border: 0 solid;
-					background-color: transparent;
-					height: 18px;
-					margin-top: -5px;
-					color: #ffffff;
-					outline: none;
-				}
-			</style>
+		<div class="col-8">
+			<div class="card bg-light p-3">
+				<div id="bs-tags"></div>
+				<style type="text/css">
+					#bs-tags .badge i.icon-cancel {
+						font-size: 0.75rem;
+					}
+					#bs-tags .badge a,
+					#bs-tags .badge {
+						color:aliceblue;
+						font-size: 1rem;
+						font-weight: 100;
+					}
+				</style>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4"><h3>Custom tags</h3>
-		<p>This is example how you can customize tags to anything you like</p>
+	<div class="row mt-4">
+		<div class="col-4"><h3>Custom style</h3>
+		<p class="small">This is example how you can customize tags to anything you like.</p>
 		</div>
-		<div class="span8">
-			<div id="bs-tags-custom"></div>
-			<style type="text/css">
-				#bs-tags-custom .pills-list {
-					display: block;
-				}
-				#bs-tags-custom .tag-badge {
-					margin-right: 10px;
-					margin-bottom: 10px;
-					border-radius: 8px;
-					border: 2px dashed transparent;
-					background-color: #f5f5f5;
-					width: 175px;
-					line-height: 20px;
-					padding: 5px;
-					text-overflow: ellipsis;
-					position: relative;
-				}
-				#bs-tags-custom .tag-badge a.tag-link {
-					color: #151515;
-				}
-				#bs-tags-custom .tag-badge:hover {
-					border: 2px dashed #c4ca65;
-					background-color: #e8ee80;
+		<div class="col-8">
+			<div class="card bg-light p-3">
+				<div id="bs-tags-custom"></div>
+				<style type="text/css">
+					#bs-tags-custom .pills-list {
+						display: block;
+					}
+					#bs-tags-custom .tag-badge {
+						margin-right: 10px;
+						margin-bottom: 10px;
+						border-radius: 8px;
+						border: 2px dashed transparent;
+						background-color: #f5f5f5;
+						width: 250px;
+						line-height: 20px;
+						padding: 5px;
+						overflow: hidden;
+						height: 57px;
+						text-overflow: ellipsis;
+						position: relative;
+					}
+					#bs-tags-custom .tag-badge a.tag-link {
+						color: #151515;
+					}
+					#bs-tags-custom .tag-badge:hover {
+						border: 2px dashed #c4ca65;
+						background-color: #e8ee80;
 
-				}
-				#bs-tags-custom .tag-badge:hover a.tag-link {
-					text-decoration: none;
-					color: #555b2b;
-				}
-				#bs-tags-custom .tag-remove {
-					position: absolute;
-					top: -2px;
-					right: 2px;
-				}
+					}
+					#bs-tags-custom .tag-badge:hover a.tag-link {
+						text-decoration: none;
+						color: #555b2b;
+					}
+					#bs-tags-custom .tag-remove {
+						position: absolute;
+						top: 3px;
+						right: 2px;
+					}
 
-			</style>
+				</style>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4"><h3>Tags in a Form</h3>
-			<p>This is an example of including tags in a form and using a custom function when duplicate tags are added.</p>
+	<div class="row mt-4">
+		<div class="col-4">
+			<h3>Tags in a Form</h3>
+			<p class="small">This is an example of including tags in a form and using a custom function when duplicate tags are added it will highlight duplicate.</p>
 		</div>
-		<form >
-			<div id="bs-tags-form"></div>
-			<button type="submit" class="btn">Submit</button>
-			<style type="text/css">
-				button {
-					margin-left: 30%;
-				}
-				#bs-tags-form .tag-badge {
-					margin-right: 5px;
-					margin-bottom: 5px;
-					font-weight: 100;
-					font-size: 14px;
-					line-height: 20px;
-				}
-				#bs-tags-form .tag-icon {
-					margin-left: 5px;
-					margin-right: -3px;
-				}
-				#bs-tags-form .tag-badge a.tag-link {
-					color: #ffffff;
-					text-decoration: underline;
-				}
-				#bs-tags-form .tag-input {
-					border: 0 solid;
-					margin: 0;
-					padding: 0;
-					font-weight: 100;
-					border: 0 solid;
-					background-color: transparent;
-					height: 18px;
-					margin-top: -5px;
-					color: #ffffff;
-					outline: none;
-				}
-			</style>
-		</form>
+		<div class="col-8">
+			<div class="card bg-light p-3">
+				<form >
+					<div id="bs-tags-form" class=""></div>
+					<button type="submit" class="btn btn-sm btn-primary mt-2">Submit</button>
+					<style type="text/css">
+					#bs-tags-form .badge i.icon-cancel {
+						font-size: 0.75rem;
+					}
+					#bs-tags-form .badge a,
+					#bs-tags-form .badge {
+						color:black;
+						font-size: 0.75rem;
+						font-weight: 100;
+					}
+					</style>
+				</form>
+			</div>
+		</div>
 	</div>
-</div>
-	<br><br>
-	<div id="disqus_thread"></div>
+	<div id="disqus_thread" class="mt-4"></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 		var disqus_shortname = 'bootstraptagsinput'; // required: replace example with your forum shortname
@@ -165,41 +135,47 @@
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 
-<script type="text/javascript" src="components/jquery/jquery.js"></script>
-<script type="text/javascript" src="components/bootstrap/docs/assets/js/bootstrap.js"></script>
-<script type="text/javascript" src="components/jquery-color/jquery.color.js"></script>
+<script type="text/javascript" src="components/jquery.min.js"></script>
+<script type="text/javascript" src="components/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="components/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="components/jquery.color.js"></script>
 <script type="text/javascript" src="js/bootstrap-tags.js"></script>
 <script type="text/javascript">
+	(function($){
 	$('#bs-tags').tags({
 		suggestions: ["Banana", "Durian", "Cocos"],
-		suggestion_url: "urls/suggestions.json.php",
-		values_url: 'urls/defaults.json'
+		suggestion_url: "urls/suggestions.json",
+		values_url: 'urls/defaults.json',
+		only_suggestions: true
 	});
 
 	$('#bs-tags-custom').tags({
 		double_hilight: '#C4CA65',
 		only_suggestions: true,
-		suggestion_url: "urls/user_suggestions.json.php",
+		suggestion_url: "urls/user_suggestions.json",
 		templates: {
-			pill: '<div class="pull-left tag-badge">{0}</div>',
+			pill: '<div class="float-left tag-badge p-2">{0}</div>',
 			add_pill: '<div class="tag-form"></div>',
-			input_pill: '<div class="tag-form input-append"></div>',
 			number: ' <sup><small>{0}</small></sup>',
-			plus_icon: '<button class="btn"><i class="icon-plus-sign"></i></button>',
-			delete_icon: '<i class="icon-remove-sign tag-icon"></i>',
-			ok_icon: '<button class="btn"><i class="icon-ok-sign tag-icon"></i></button>'
+			plus_icon: '<button class="btn btn-primary btn-sm"><i class="icon-plus"></i></button>',
+			delete_icon: '<i class="icon-trash-empty"></i>',
 		},
 		values_url: 'urls/default_users.json'
 	});
+
 	$('#bs-tags-form').tags({
 		suggestions: ["Banana", "Durian", "Cocos"],
-		suggestion_url: "urls/suggestions.json.php",
+		suggestion_url: "urls/suggestions.json",
 		values_url: 'urls/defaults.json',
+		templates: {
+			pill: '<span class="badge badge-warning badge-pill tag-badge p-2 mr-2">{0}</span>'
+		},
 		onDuplicate: function(original, duplicate){
 			$(original).hide().fadeIn();
 			return false;
 		}
 	});
+}(jQuery))
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-tags",
-    "version": "0.0.2",
+    "version": "1.0.0",
     "description": "Bootstrap styled tag pills",
     "main": "index.js",
     "scripts": {
@@ -19,9 +19,13 @@
     "author": "Sergey Romanov",
     "license": "CC",
     "devDependencies": {
+        "bootstrap": "^4.3.1",
+        "bootstrap-3-typeahead": "^4.0.2",
+        "bower": "~0.8.5",
         "grunt": "~0.4.1",
         "grunt-contrib-cssmin": "~0.5.0",
         "grunt-contrib-uglify": "~0.2.0",
-        "bower": "~0.8.5"
+        "jquery": "^3.4.1",
+        "typeahead.js": "github:twitter/typeahead.js"
     }
 }

@@ -1,7 +1,7 @@
 [
     {
         "id": "2",
-        "text": "Apple",
+        "name": "Apple",
         "html": "You have found Apple",
         "num": 5,
         "url": "http://www.apple.com",
@@ -9,12 +9,12 @@
     },
     {
         "id": "3",
-        "text": "Mango",
+        "name": "Mango",
         "html": "You have found <b>Mango</b>!",
         "url": "http://www.mango.com/"
     },
     {
         "id": "5",
-        "text": "Pear"
+        "name": "Pear"
     }
 ]
